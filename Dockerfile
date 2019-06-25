@@ -21,7 +21,7 @@ RUN git clone --single-branch -b cpuonlyverus https://github.com/monkins1010/ccm
 FROM debian:sid-slim
 
 RUN apt-get update && apt-get dist-upgrade -y && \
-    apt-get install -y ca-certificates libcurl4 libjansson4 && \
+    apt-get install -y ca-certificates libcurl4 libjansson4 libgomp1 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
