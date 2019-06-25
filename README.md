@@ -16,7 +16,7 @@ docker build -t verusccminer .
 docker run --name verusccminer verusccminer -a verus -o stratum+tcp://verus.wattpool.net:1232 -u WALLET_ADDRESS.WORKER_NAME -p x -tX
 ```
 
-Replace `WALLET_ADDRESS` with your verus address, `WORKER_NAME` with a workername that will be displayed on the pool and `-tx` with the number of threads that you would like to run the miner on eg. `-t4` for 4 threads.
+Replace `WALLET_ADDRESS` with your verus address, `WORKER_NAME` with a workername that will be displayed on the pool and `-tX` with the number of threads that you would like to run the miner on eg. `-t4` for 4 threads.
 
 ### Tip
 Run miner in background using `screen`.
