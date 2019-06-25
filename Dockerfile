@@ -1,4 +1,4 @@
-FROM ubuntu:latest as builder
+FROM debian:sid-slim as builder
 
 RUN apt-get update && apt-get dist-upgrade -y && \
     apt-get install -y ca-certificates libcurl4 libjansson4 && \
@@ -20,7 +20,7 @@ RUN git clone --single-branch -b cpuonlyverus https://github.com/monkins1010/ccm
     mv ccminer/ccminer /usr/sbin/ && \
     rm -rf ccminer
 
-FROM ubuntu:latest
+FROM debian:sid-slim
 
 RUN apt-get update && apt-get dist-upgrade -y && \
     apt-get install -y ca-certificates libcurl4 libjansson4 && \
