@@ -13,7 +13,7 @@ docker build -t verusccminer .
 
 ## Run the miner
 ```shell
-docker run --name verusccminer verusccminer -a verus -o stratum+tcp://verus.wattpool.net:1232 -u WALLET_ADDRESS.WORKER_NAME -p x -tx
+docker run --name verusccminer verusccminer -a verus -o stratum+tcp://verus.wattpool.net:1232 -u WALLET_ADDRESS.WORKER_NAME -p x -tX
 ```
 
 Replace `WALLET_ADDRESS` with your verus address, `WORKER_NAME` with a workername that will be displayed on the pool and `-tx` with the number of threads that you would like to run the miner on eg. `-t4` for 4 threads.
@@ -21,7 +21,7 @@ Replace `WALLET_ADDRESS` with your verus address, `WORKER_NAME` with a workernam
 ### Tip
 Run miner in background using `screen`.
 ```shell
-screen -dmS verusminer docker run verusccminer -a verus -o stratum+tcp://verus.wattpool.net:1232 -u RMJid9TJXcmBh2BhjAWXqGvaSSut2vbhYp.dockerworker -p x -tx
+screen -dmS verusminer docker run verusccminer -a verus -o stratum+tcp://verus.wattpool.net:1232 -u RMJid9TJXcmBh2BhjAWXqGvaSSut2vbhYp.dockerworker -p x -t4
 ```
 This will run the containerized miner in a screen named `verusminer`, you can see what is running inside that screen by entering the command `screen -r verusminer` and detach from that screen with `[ctrl]+a d` (that is the ctrl and a keys together, then d for detach), if you do ctrl+c you will quit the miner.
 
