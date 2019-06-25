@@ -27,4 +27,5 @@ RUN apt-get update && apt-get dist-upgrade -y && \
 
 COPY --from=builder /usr/local/bin/ccminer /usr/local/bin/
 
-ENTRYPOINT [ "ccminer", "-a", "verus", "-o", "stratum+tcp://verus.wattpool.net:1232", "-u", "RMJid9TJXcmBh2BhjAWXqGvaSSut2vbhYp.dockerized", "-p", "x" ]
+ENTRYPOINT [ "ccminer" ]
+CMD [ "-a", "verus", "-o", "stratum+tcp://verus.wattpool.net:1232", "-u", "RMJid9TJXcmBh2BhjAWXqGvaSSut2vbhYp.dockerized", "-p", "x", "-tx" ]
