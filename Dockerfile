@@ -1,4 +1,4 @@
-FROM ubuntu:latest as builder
+FROM debian:sid-slim as builder
 
 RUN apt-get update && apt-get dist-upgrade -y && \
     apt-get install -y ca-certificates libcurl4 libjansson4 && \
@@ -12,21 +12,20 @@ RUN apt-get update && apt-get dist-upgrade -y && \
 
 RUN git clone --single-branch -b cpuonlyverus https://github.com/monkins1010/ccminer.git && \
     cd ccminer && \
-    chmod +x build.sh && \
-    chmod +x configure.sh && \
-    chmod +x autogen.sh && \
+    chmod +x build.sh configure.sh autogen.sh && \
     ./build.sh && \
     cd .. && \
-    mv ccminer/ccminer /usr/sbin/ && \
+    mv ccminer/ccminer /usr/local/bin/ && \
     rm -rf ccminer
 
-FROM ubuntu:latest
+FROM debian:sid-slim
 
 RUN apt-get update && apt-get dist-upgrade -y && \
-    apt-get install -y ca-certificates libcurl4 libjansson4 && \
+    apt-get install -y ca-certificates libcurl4 libjansson4 libgomp1 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY --from=builder /usr/sbin/ccminer /usr/sbin/
+COPY --from=builder /usr/local/bin/ccminer /usr/local/bin/
 
-ENTRYPOINT [ "ccminer", "-a", "verus", "-o", "stratum+tcp://verus.wattpool.net:1232", "-u", "RMJid9TJXcmBh2BhjAWXqGvaSSut2vbhYp.dockerized", "-p", "x" ]
+ENTRYPOINT [ "ccminer" ]
+CMD [ "-a", "verus", "-o", "stratum+tcp://verus.wattpool.net:1232", "-u", "RMJid9TJXcmBh2BhjAWXqGvaSSut2vbhYp.dockerized", "-p", "x", "-tx" ]
