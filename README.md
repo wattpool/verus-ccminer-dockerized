@@ -25,6 +25,71 @@ screen -dmS verusminer docker run verusccminer -a verus -o stratum+tcp://verus.w
 ```
 This will run the containerized miner in a screen named `verusminer`, you can see what is running inside that screen by entering the command `screen -r verusminer` and detach from that screen with `[ctrl]+a d` (that is the ctrl and a keys together, then d for detach), if you do ctrl+c you will quit the miner.
 
+## Running the miner container in the background:
+
+1. Build the docker image for the miner.
+
+   When using this feature, it is recommended to build the container with your wallet and worker ID baked into the image.
+
+   * Edit the `Dockerfile` and replace `RMJid9TJXcmBh2BhjAWXqGvaSSut2vbhYp.dockerized` with your own WALLET_ADDRESS.WORKER_NAME
+
+   * Rebuild the docker image:
+   ```shell
+   docker build -t verusccminer .
+   ```
+
+2. Create a new container using the newly built docker image:
+
+```
+docker container create verusccminer
+```
+
+This command will output a long hash.
+
+3. Start the new container referenced by the long hash from the previous step:
+
+```
+docker container start {that long hash}
+```
+
+* You can combine steps 2 & 3 into a single command:
+
+```
+docker container start `docker container create verusccminer`
+```
+
+* You can limit CPU usage by passing arguments to the `docker container create` command:
+
+```
+docker container start `docker container create --cpus=".7" verusccminer`
+```
+
+* If you need to stop the container, you can use the command:
+
+```
+docker container stop {that long hash}
+```
+
+* Restart the container with the command:
+
+```
+docker container restart {that long hash}
+```
+
+4. You can view the running container and see the newly assigned name with the command:
+
+```
+docker container ls
+```
+
+5. View container logs using that newly assigned name:
+
+```
+docker container logs -f that-container-name
+```
+
+---
+
 ## Command Line Options
 Full list of CLI options for this version of ccminer
 ```shell
