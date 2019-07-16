@@ -88,6 +88,32 @@ docker container ls
 docker container logs -f that-container-name
 ```
 
+## Running the miner container as a systemd service using the Makefile:
+
+Assuming you have created a user `verusminer` in group `verusminer` and have cloned this repository in the `verusminer` home user directory, the following service file will start the daemon automatically at system startup.
+
+Adjust the percentage of CPU being allocated to the process by editing the file `cpus.txt`.  By default, this is set to 35% - feel free to change this value.
+
+Enter the following into `/etc/systemd/system/verusccminer.service`:
+
+```
+[Unit]
+Description=Verus ccminer daemon service
+After=network.target
+
+[Service]
+User=verusminer
+Group=verusminer
+Type=simple
+Restart=always
+RestartSec=90s
+WorkingDirectory=/home/verusminer/verus-ccminer-dockerized
+ExecStart=/usr/bin/make miner
+
+[Install]
+WantedBy=default.target
+```
+
 ---
 
 ## Command Line Options
