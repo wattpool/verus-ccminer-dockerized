@@ -1,5 +1,14 @@
 # Dockerized Verus ccminer
 
+Verus-ccminer is now hosted on docker hub.  You can get it there, or built it yourself:
+
+## Pull the image from docker hub
+```shell
+docker pull wattpool/verusccminer
+```
+
+...or build it yourself:
+
 ## Clone the repo
 ```shell
 git clone https://github.com/wattpool/verus-ccminer-dockerized.git
