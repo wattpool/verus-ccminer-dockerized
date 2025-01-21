@@ -1,4 +1,4 @@
-FROM debian:sid-slim as builder
+FROM debian:buster-slim as builder
 
 RUN apt-get update && apt-get dist-upgrade -y && \
     apt-get install -y ca-certificates libcurl4 libjansson4 libgomp1 && \
@@ -18,7 +18,7 @@ RUN git clone --single-branch -b Verus2.2 https://github.com/monkins1010/ccminer
     mv ccminer/ccminer /usr/local/bin/ && \
     rm -rf ccminer
 
-FROM debian:sid-slim
+FROM debian:buster-slim
 
 RUN apt-get update && apt-get dist-upgrade -y && \
     apt-get install -y ca-certificates libcurl4 libjansson4 libgomp1 && \
